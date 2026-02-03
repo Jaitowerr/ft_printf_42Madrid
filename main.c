@@ -106,3 +106,40 @@
 // }
 
 // cc main.c ft_printf.c printf_c_s.c printf_d_i.c printf_u.c printf_x_x.c -o  prueba && ./prueba
+
+#include <stdio.h>
+
+int	main(void)
+{
+	void	*ptr1 = (void *)0x7ffeefbff618;
+	void	*ptr2 = NULL;
+	int		a = 42;
+	void	*ptr3 = &a;
+	int		res_ft;
+	int		res_std;
+
+	
+	printf("--- TEST 1: Puntero normal ---\n");
+	res_ft = ft_printf("FT : %p\n", ptr1);
+	res_std = printf("STD: %p\n", ptr1);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 2: Puntero NULL ---\n");
+	res_ft = ft_printf("FT : %p\n", ptr2);
+	res_std = printf("STD: %p\n", ptr2);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 3: Dirección de una variable local ---\n");
+	res_ft = ft_printf("FT : %p\n", ptr3);
+	res_std = printf("STD: %p\n", ptr3);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 4: Varios punteros seguidos ---\n");
+	res_ft = ft_printf("FT : %p %p\n", ptr1, ptr3);
+	res_std = printf("STD: %p %p\n", ptr1, ptr3);
+	printf("Retorno -> FT: %d | STD: %d\n", res_ft, res_std);
+
+	return (0);
+}
+
+// cc main.c ft_printf.c printf_c_s.c printf_d_i.c printf_u.c printf_p.c printf_x_x.c -o  prueba && ./prueba

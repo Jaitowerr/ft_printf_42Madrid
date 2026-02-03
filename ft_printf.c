@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:18:11 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/02 16:08:45 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:33:31 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,51 @@
 
 //20/16 1 %= 4-> e
 
-static	int	classification(char const *s, size_t i, va_list arguments)
+static	int	classification(char const *s, size_t i, va_list arguments, long *count)
 {
-	i++;
-		
-	if (s[i] == 'c')
-		ft_putchar_fd(va_arg(arguments, int), 1);		
-	else if (s[i] == 's')
-		ft_putstr_fd(va_arg(arguments, char *), 1);		
-	else if (s[i] == 'p')
-		return (0);		
-	else if (s[i] == 'd' || s[i] == 'i')
-		free_word(arguments);		
-	else if (s[i] == 'u')
-		free_word_positive(arguments);		
-	else if (s[i] == 'x' || s[i] == 'X')
-		hexadecimal(arguments, s[i]);
-	else if (s[i] == '%')
-		return (0);		
-	
-	return (i);
+	if (s[++i] == 'c')
+		return (ft_putchar_fd(va_arg(arguments, int), 1));		
+	else if (s[++i] == 's')
+		return (ft_putstr_fd(va_arg(arguments, char *), 1));		
+	else if (s[++i] == 'p')
+		return (pointer_address(arguments));
+	else if (s[++i] == 'd' || s[++i] == 'i')
+		return (free_word(arguments));		
+	else if (s[++i] == 'u')
+		return (free_word_positive(arguments));
+	else if (s[++i] == 'x' || s[++i] == 'X')
+		return (hexadecimal(arguments, s[++i]));
+	else if (s[++i] == '%')
+		ft_putstr_fd('%', 1);
+	else if (s[++i] == '\0')
+		return (-1);
 }
 
 int	ft_printf(char const *s, ...)
 {
 	size_t		i;
-	size_t		i_argv;
+	long		*count;
 	va_list		arguments;
 
 	va_start(arguments, s);
-	i_argv = 0;
 	i = 0;
+	count = 0;
 	while (s[i])
 	{
 		if (s[i] != '%')
-			write (1, &s[i], 1);
+		{
+			count += write (1, &s[i], 1);
+			count++;
+		}
 		else
 		{
-			classification(s, i, arguments);	
+			count += classification(s, i, arguments, count);	
 			i++;
 		}
 		i++;
 	}
 	va_end(arguments);
-	return (0);
+	return (count);
 }
 
 

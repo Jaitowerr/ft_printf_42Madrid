@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:09:27 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/02 16:02:21 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:33:02 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,19 @@ static	char *unsigned_ft_itoa(unsigned int number)
 	return (word);
 }
 
-void	free_word_positive(va_list arguments)
+int	free_word_positive(va_list arguments)
 {
 	char	*str;
 	unsigned int	number;
+	long	len;
 
 	number = va_arg(arguments,unsigned int);
 	str = unsigned_ft_itoa(number);
 	if (str)
 	{
 		ft_putstr_fd(str, 1);
+		len = ft_strlen(str);
 		free(str);
 	}
+	return (len)
 }
