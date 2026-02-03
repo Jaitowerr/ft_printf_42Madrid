@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:09:27 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 19:33:02 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:58:19 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	size_word(unsigned int numb)
 	size = 0;
 	if (numb == 0)
 		return (1);
-	while(numb)
+	while (numb)
 	{
 		numb = numb / 10;
 		size++;
@@ -38,7 +38,7 @@ static void	fill_word(int size, char *word, unsigned int numb)
 	}
 }
 
-static	char *unsigned_ft_itoa(unsigned int number)
+static char	*unsigned_ft_itoa(unsigned int number)
 {
 	char	*word;
 	int		size;
@@ -55,17 +55,17 @@ static	char *unsigned_ft_itoa(unsigned int number)
 
 int	free_word_positive(va_list arguments)
 {
-	char	*str;
+	char			*str;
 	unsigned int	number;
-	long	len;
+	int				len;
 
-	number = va_arg(arguments,unsigned int);
+	len = 0;
+	number = va_arg(arguments, unsigned int);
 	str = unsigned_ft_itoa(number);
 	if (str)
 	{
-		ft_putstr_fd(str, 1);
-		len = ft_strlen(str);
+		len = ft_putstr_fd(str, 1);
 		free(str);
 	}
-	return (len)
+	return (len);
 }

@@ -1,114 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/03 23:48:33 by aitorres          #+#    #+#             */
+/*   Updated: 2026/02/03 23:58:07 by aitorres         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-// int main (void)
-// {
-	
-// 	char	a = 'a';
-// 	char	*b = "Jaitowerr";
-// 	int		tel = 619789456;
-	
-// 	ft_printf("hola, nombre: %c y %s\n", 'A', "Jaitowerr");
-// 	ft_printf("hola, nombre: %c y %s\n", a, b);
+//test para printf_c_s.c
 
-// 	ft_printf("hola, teléfono: %d y %i\n", tel, tel);
-// 	ft_printf("");
 
-// 	ft_printf("edad: %u", -30);
-
-// 	return (0);
-// }
-
-// #include "ft_printf.h"
-// #include <stdio.h>
-// int main (void)
-// {
-// 	printf("%x", 200);
-// }
-
-// int main (void)
-// {
-//     unsigned int ui_max = 4294967295U;
-
-//     printf("--- PRUEBAS DE %%u ---\n");
-
-//     // Caso 1: Cero
-//     ft_printf("Mio  (0): %u\n", 0);
-//     printf("Real (0): %u\n", 0);
-//     printf("\n");
-
-//     // Caso 2: Máximo de un INT con signo (no debería haber problema)
-//     ft_printf("Mio  (INT_MAX): %u\n", INT_MAX);
-//     printf("Real (INT_MAX): %u\n", INT_MAX);
-//     printf("\n");
-
-//     // Caso 3: El número "mágico" (Justo uno más que INT_MAX)
-//     // Aquí es donde ft_itoa fallaría pero unsigned_ft_itoa triunfa
-//     ft_printf("Mio  (2147483648): %u\n", 2147483648U);
-//     printf("Real (2147483648): %u\n", 2147483648U);
-//     printf("\n");
-
-//     // Caso 4: Máximo valor de un UNSIGNED INT (4.294.967.295)
-//     ft_printf("Mio  (UINT_MAX): %u\n", ui_max);
-//     printf("Real (UINT_MAX): %u\n", ui_max);
-//     printf("\n");
-
-//     // Caso 5: Pasar un número negativo
-//     // Debe imprimir 4294967295 porque %u interpreta los bits como positivos
-//     ft_printf("Mio  (-1): %u\n", -1);
-//     printf("Real (-1): %u\n", -1);
-//     printf("\n");
-
-//     // Caso 6: El número que usaste antes
-//     ft_printf("Mio  (30): %u\n", 30);
-//     printf("Real (30): %u\n", 30);
-
-//     return (0);
-// }
-
-// #include "ft_printf.h"
-// #include <stdio.h>
-// #include <limits.h>
-
-// int main (void)
-// {
-//     unsigned int n1 = 255;        // En hex es ff
-//     unsigned int n2 = 4294967295; // En hex es ffffffff
-//     unsigned int n3 = 0;          // En hex es 0
-
-//     printf("--- PRUEBAS HEXADECIMAL ---\n\n");
-
-//     // Caso 1: Un número pequeño que usa letras
-//     ft_printf("Mio  (255 en x): %x\n", n1);
-//     printf("Real (255 en x): %x\n", n1);
-//     printf("\n");
-
-//     // Caso 2: Mayúsculas
-//     ft_printf("Mio  (255 en X): %X\n", n1);
-//     printf("Real (255 en X): %X\n", n1);
-//     printf("\n");
-
-//     // Caso 3: El número cero
-//     ft_printf("Mio  (0): %x\n", n3);
-//     printf("Real (0): %x\n", n3);
-//     printf("\n");
-
-//     // Caso 4: El número máximo (UINT_MAX)
-//     ft_printf("Mio  (Max): %x\n", n2);
-//     printf("Real (Max): %x\n", n2);
-//     printf("\n");
-
-//     // Caso 5: Un número aleatorio grande para ver la mezcla de letras y números
-//     unsigned int n4 = 123456789;
-//     ft_printf("Mio  (123456789): %x\n", n4);
-//     printf("Real (123456789): %x\n", n4);
-
-//     return (0);
-// }
-
-// cc main.c ft_printf.c printf_c_s.c printf_d_i.c printf_u.c printf_x_x.c -o  prueba && ./prueba
-
+#include "ft_printf.h"
 #include <stdio.h>
 
+int main(void)
+{
+	int ret;
+
+	printf("--- TEST C y S ---\n");
+	ret = ft_putchar_fd('A', 1);
+	printf("\nRetorno putchar: %d (Debe ser 1)\n", ret);
+
+	ret = ft_putstr_fd("Hola 42", 1);
+	printf("\nRetorno putstr: %d (Debe ser 7)\n", ret);
+	
+	ret = ft_putstr_fd("", 1);
+	printf("\nRetorno putstr vacío: %d (Debe ser 0)\n", ret);
+	return (0);
+}
+
+
+//cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
+
+
+//test para printf_d_i.c
+/*
+#include "ft_printf.h"
+#include <stdio.h>
+#include <limits.h>
+
+// Simulamos el va_list para probar la función free_word
+// Si no quieres líos con va_list, prueba ft_itoa directamente:
+int main(void)
+{
+	printf("--- TEST D e I ---\n");
+	// Nota: Como free_word necesita va_list, probamos la lógica interna
+	// Si ya tienes ft_printf.c listo, usa el main general anterior.
+	// Si no, aquí probamos los casos críticos:
+	ft_printf("Cero: %d\n", 0);
+	ft_printf("Negativo: %d\n", -123);
+	ft_printf("Max Int: %d\n", INT_MAX);
+	ft_printf("Min Int: %d\n", INT_MIN);
+	return (0);
+}
+*/
+
+//cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
+
+
+//Test para print_p.c
+
+/*
+#include "ft_printf.h"
+#include <stdio.h>
+
+int main(void)
+{
+	int a = 42;
+	int ret_mio, ret_real;
+
+	printf("--- TEST P (Punteros) ---\n");
+	
+	printf("Mio:  ");
+	ret_mio = ft_printf("%p", &a);
+	printf("\nReal: ");
+	ret_real = printf("%p", &a);
+	printf("\nRetornos -> Mio: %d | Real: %d\n\n", ret_mio, ret_real);
+
+	printf("NULL Mio:  ");
+	ret_mio = ft_printf("%p", NULL);
+	printf("\nNULL Real: ");
+	ret_real = printf("%p", NULL);
+	printf("\nRetornos -> Mio: %d | Real: %d\n", ret_mio, ret_real);
+
+	return (0);
+}
+*/
+/*
 int	main(void)
 {
 	void	*ptr1 = (void *)0x7ffeefbff618;
@@ -141,5 +124,67 @@ int	main(void)
 
 	return (0);
 }
+*/
+
+//cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
+
+//Test para printf_x_x.c
+
+/*
+#include "ft_printf.h"
+#include <stdio.h>
+
+int main(void)
+{
+	printf("--- TEST x y X ---\n");
+	ft_printf("Minus: %x (debe ser ff)\n", 255);
+	ft_printf("Mayus: %X (debe ser FF)\n", 255);
+	ft_printf("Cero:  %x\n", 0);
+	ft_printf("Grande: %x (debe ser 7fffffff)\n", 2147483647);
+	return (0);
+}
+*/
+
+//cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
+
+//Test para printf_u.c
+
+/*
+#include "ft_printf.h"
+#include <stdio.h>
+
+int main(void)
+{
+	printf("--- TEST U (Unsigned) ---\n");
+	ft_printf("Mio (Max Unsigned): %u\n", 4294967295U);
+	printf("Real (Max Unsigned): %u\n", 4294967295U);
+	
+	// Prueba pasarle un negativo a ver si lo convierte a positivo grande
+	ft_printf("Mio (Pasando -1): %u\n", -1);
+	printf("Real (Pasando -1): %u\n", -1);
+	return (0);
+}
+*/
+
+//cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+#include <stdio.h>
+
 
 // cc main.c ft_printf.c printf_c_s.c printf_d_i.c printf_u.c printf_p.c printf_x_x.c -o  prueba && ./prueba
+
+*/

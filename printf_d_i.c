@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 13:39:25 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/02 15:22:42 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:58:17 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,15 @@ static char	*ft_itoa(int n)
 	return (word);
 }
 
-void	free_word(va_list arguments)
+int	free_word(va_list arguments)
 {
 	char	*str;
+	int		len;
 
 	str = ft_itoa(va_arg(arguments, int));
-	ft_putstr_fd(str, 1);
-	free (str);		
+	if (!str)
+		return (NULL);
+	len = ft_putstr_fd(str, 1);
+	free (str);
+	return (len);
 }

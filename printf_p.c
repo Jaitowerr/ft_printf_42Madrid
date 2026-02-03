@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:30:35 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 19:20:08 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:58:18 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	size_word(unsigned long numb)
 	size = 0;
 	if (numb == 0)
 		return (1);
-	while(numb)
+	while (numb)
 	{
 		numb = numb / 16;
 		size++;
@@ -48,7 +48,7 @@ static void	fill_word(int size, char *word, unsigned long numb, char *str)
 	}
 }
 
-static	char *unsigned_hexadecimal(unsigned long number, char *str)
+static	char	*unsigned_hexadecimal(unsigned long number, char *str)
 {
 	char	*word;
 	int		size;
@@ -69,19 +69,19 @@ int	pointer_address(va_list arguments)
 	char			*word;
 	unsigned long	ptr;
 	long			len;
-	
-	len = 10;
+
+	len = 0;
 	ptr = (unsigned long)va_arg(arguments, void *);
 	if (ptr == 0)
 		return (write(1, "(nil)", 5));
-	write(1, "0x", 2);
 	str = "0123456789abcdef";
 	word = unsigned_hexadecimal(ptr, str);
-	if(word)
+	if (word)
 	{
-		ft_putstr_fd(word, 1);
-		len = ft_strlen_local(word) + 2;
+		write(1, "0x", 2);
+		len = ft_putstr_fd(word, 1) + 2;
 		free(word);
 	}
-	return (len + 2);
+	return (len);
 }
+

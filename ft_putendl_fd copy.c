@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_c_s.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 12:17:38 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 23:38:58 by aitorres         ###   ########.fr       */
+/*   Created: 2026/01/23 18:50:42 by aitorres          #+#    #+#             */
+/*   Updated: 2026/02/03 23:58:21 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// ft_printf(%c %s, 'a' , "hola");
-
-int	ft_putchar_fd(char c, int fd)
-{
-	return (write(fd, &c, 1));
-}
 
 static size_t	ft_strlen_local(const char *string)
 {
@@ -28,10 +22,12 @@ static size_t	ft_strlen_local(const char *string)
 	return (length);
 }
 
-int	ft_putstr_fd(char *s, int fd)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
+	unsigned int	i;
 
 	i = ft_strlen_local(s);
-	return (write(fd, s, i));
+	write(fd, s, i);
+	write(fd, "\n", 1);
 }
+
