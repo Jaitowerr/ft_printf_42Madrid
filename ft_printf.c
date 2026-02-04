@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:18:11 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/04 01:27:55 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/04 01:54:39 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static int	classification(char s, va_list arguments)
 		return (ft_hexadecimal(arguments, s));
 	else if (s == '%')
 		return (write(1, "%", 1));
-	// else if (s == '\0')
-	return (0);
+	return (-1);
 }
 
 int	ft_printf(char const *s, ...)
@@ -37,6 +36,7 @@ int	ft_printf(char const *s, ...)
 	va_list		arguments;
 	int			i;
 	int			count;
+	int			temp;
 
 	va_start(arguments, s);
 	i = 0;
@@ -46,11 +46,14 @@ int	ft_printf(char const *s, ...)
 		if (s[i] != '%')
 			count += write (1, &s[i], 1);
 		else
-			count += classification(s[++i], arguments);
+		{
+			temp = classification(s[++i], arguments);
+			if (temp == -1)
+				return (-1);
+			count += temp;
+		}
 		i++;
 	}
 	va_end(arguments);
 	return (count);
 }
-
-

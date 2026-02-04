@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:30:35 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/04 01:22:14 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/04 01:55:39 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ int	ft_pointer_address(va_list arguments)
 	}
 	return (len);
 }
-

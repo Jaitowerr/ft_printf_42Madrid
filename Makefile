@@ -6,7 +6,7 @@
 #    By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/30 17:32:47 by aitorres          #+#    #+#              #
-#    Updated: 2026/02/04 01:30:56 by aitorres         ###   ########.fr        #
+#    Updated: 2026/02/04 01:47:33 by aitorres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ fclean:		clean
 
 re:			fclean	all	#recompila desde cero
 
+.PHONY: all clean fclean re
 
 # make        # Compila todo
 # make clean  # Borra objetos
