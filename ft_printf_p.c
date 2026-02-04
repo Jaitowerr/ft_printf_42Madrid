@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_p.c                                         :+:      :+:    :+:   */
+/*   ft_printf_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:30:35 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 23:58:18 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/04 01:22:14 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static size_t	ft_strlen_local(const char *string)
-{
-	size_t	length;
-
-	length = 0;
-	while (string[length] != '\0')
-		length++;
-	return (length);
-}
 
 static int	size_word(unsigned long numb)
 {
@@ -63,7 +53,7 @@ static	char	*unsigned_hexadecimal(unsigned long number, char *str)
 	return (word);
 }
 
-int	pointer_address(va_list arguments)
+int	ft_pointer_address(va_list arguments)
 {
 	char			*str;
 	char			*word;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_u.c                                         :+:      :+:    :+:   */
+/*   ft_printf_x_x.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 14:09:27 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 23:58:19 by aitorres         ###   ########.fr       */
+/*   Created: 2026/02/02 15:30:24 by aitorres          #+#    #+#             */
+/*   Updated: 2026/02/04 01:22:42 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ static int	size_word(unsigned int numb)
 		return (1);
 	while (numb)
 	{
-		numb = numb / 10;
+		numb = numb / 16;
 		size++;
 	}
 	return (size);
 }
 
-static void	fill_word(int size, char *word, unsigned int numb)
+static void	fill_word(int size, char *word, unsigned int numb, char *str)
 {
 	if (numb == 0)
-		word[0] = '0';
+		word[0] = str[(numb % 16)];
 	while (numb > 0)
 	{
-		word[--size] = (numb % 10) + '0';
-		numb = numb / 10;
+		word[--size] = str[(numb % 16)];
+		numb = numb / 16;
 	}
 }
 
-static char	*unsigned_ft_itoa(unsigned int number)
+static char	*unsigned_hexadecimal(unsigned int number, char *str)
 {
 	char	*word;
 	int		size;
@@ -49,23 +49,33 @@ static char	*unsigned_ft_itoa(unsigned int number)
 	if (!word)
 		return (NULL);
 	word[size] = '\0';
-	fill_word(size, word, number);
+	fill_word(size, word, number, str);
 	return (word);
 }
 
-int	free_word_positive(va_list arguments)
+int	ft_hexadecimal(va_list arguments, char c)
 {
 	char			*str;
+	char			*word;
 	unsigned int	number;
 	int				len;
 
 	len = 0;
 	number = va_arg(arguments, unsigned int);
-	str = unsigned_ft_itoa(number);
-	if (str)
+	if (c == 'x')
 	{
-		len = ft_putstr_fd(str, 1);
-		free(str);
+		str = "0123456789abcdef";
+		word = unsigned_hexadecimal(number, str);
+	}
+	else
+	{
+		str = "0123456789ABCDEF";
+		word = unsigned_hexadecimal(number, str);
+	}
+	if (word)
+	{
+		len = ft_putstr_fd(word, 1);
+		free(word);
 	}
 	return (len);
 }

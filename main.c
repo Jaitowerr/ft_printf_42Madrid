@@ -6,56 +6,112 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 23:48:33 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/03 23:58:07 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/04 00:55:16 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-//test para printf_c_s.c
-
-
+/*
 #include "ft_printf.h"
 #include <stdio.h>
 
 int main(void)
 {
-	int ret;
+	int 	mio;
+	int 	real;
+	char 	*null_str = NULL;
+	char 	*s = NULL;
 
-	printf("--- TEST C y S ---\n");
-	ret = ft_putchar_fd('A', 1);
-	printf("\nRetorno putchar: %d (Debe ser 1)\n", ret);
+	printf("--- COMPARATIVA: FT_PRINTF vs PRINTF ---\n\n");
 
-	ret = ft_putstr_fd("Hola 42", 1);
-	printf("\nRetorno putstr: %d (Debe ser 7)\n", ret);
-	
-	ret = ft_putstr_fd("", 1);
-	printf("\nRetorno putstr vacío: %d (Debe ser 0)\n", ret);
+
+	printf("TEST [%%c]:\n");
+	mio = ft_printf(" Mio:  [%c]\n", 'Z');
+	real = printf(" Real: [%c]\n", 'Z');
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+
+	printf("TEST [%%s] NORMAL:\n");
+	mio = ft_printf(" Mio:  [%s]\n", "42 Madrid es genial");
+	real = printf(" Real: [%s]\n", "42 Madrid es genial");
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+
+	printf("TEST [%%s] VACÍO:\n");
+	mio = ft_printf(" Mio:  [%s]\n", "");
+	real = printf(" Real: [%s]\n", "");
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+
+	printf("TEST [%%s] NULL:\n");
+	mio = ft_printf(" Mio:  [%s]\n", null_str);
+	real = printf(" Real: [%s]\n", null_str);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+
+	printf("TEST MIXTO:\n");
+	mio = ft_printf(" Mio:  %c %s %c %s\n", '1', "bis", '2', "trio");
+	real = printf(" Real: %c %s %c %s\n", '1', "bis", '2', "trio");
+	printf(" Retornos -> Mio: %d | Real: %d\n", mio, real);
+
+	printf("\nTEST NUMÉRICOS:\n");
+	mio = ft_printf(" Mio:  %d | %i | %u | %x | %X | %%\n", -42, 42, 4294967295U, 255, 255);
+	real = printf(" Real: %d | %i | %u | %x | %X | %%\n", -42, 42, 4294967295U, 255, 255);
+	printf(" Retornos -> Mio: %d | Real: %d\n", mio, real);
+
+
+	printf("--- TEST NULL vs NIL ---\n");
+
+	printf("STR %%s NULL:\n");
+	mio = ft_printf(" Mio:  %s\n", s);
+	real = printf(" Real: %s\n", s);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
 	return (0);
 }
-
+*/
 
 //cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
 
-
-//test para printf_d_i.c
 /*
+//test para printf_d_i.c
+
 #include "ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
 
-// Simulamos el va_list para probar la función free_word
-// Si no quieres líos con va_list, prueba ft_itoa directamente:
 int main(void)
 {
-	printf("--- TEST D e I ---\n");
-	// Nota: Como free_word necesita va_list, probamos la lógica interna
-	// Si ya tienes ft_printf.c listo, usa el main general anterior.
-	// Si no, aquí probamos los casos críticos:
-	ft_printf("Cero: %d\n", 0);
-	ft_printf("Negativo: %d\n", -123);
-	ft_printf("Max Int: %d\n", INT_MAX);
-	ft_printf("Min Int: %d\n", INT_MIN);
+	int mio;
+	int real;
+
+	printf("--- TEST PROFUNDO DE ENTEROS (%%d y %%i) ---\n\n");
+
+	printf("TEST 1: El número 0\n");
+	mio = ft_printf(" Mio:  [%d]\n", 0);
+	real = printf(" Real: [%d]\n", 0);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+	printf("TEST 2: Positivos y Negativos\n");
+	mio = ft_printf(" Mio:  [%d] [%i]\n", 42, -42);
+	real = printf(" Real: [%d] [%i]\n", 42, -42);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+	printf("TEST 3: INT_MAX e INT_MIN\n");
+	mio = ft_printf(" Mio:  MAX: [%d] | MIN: [%d]\n", INT_MAX, INT_MIN);
+	real = printf(" Real: MAX: [%d] | MIN: [%d]\n", INT_MAX, INT_MIN);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+	printf("TEST 4: Cadena larga y múltiple\n");
+	char *str = "El numero secreto es";
+	mio = ft_printf(" Mio:  %s %d y el otro es %i...\n", str, 123456, -654321);
+	real = printf(" Real: %s %d y el otro es %i...\n", str, 123456, -654321);
+	printf(" Retornos -> Mio: %d | Real: %d\n\n", mio, real);
+
+	printf("TEST 5: Números pegados\n");
+	mio = ft_printf(" Mio:  %d%d%d\n", 1, 0, -1);
+	real = printf(" Real: %d%d%d\n", 1, 0, -1);
+	printf(" Retornos -> Mio: %d | Real: %d\n", mio, real);
+
 	return (0);
 }
 */
@@ -71,37 +127,28 @@ int main(void)
 
 int main(void)
 {
-	int a = 42;
-	int ret_mio, ret_real;
-
-	printf("--- TEST P (Punteros) ---\n");
-	
-	printf("Mio:  ");
-	ret_mio = ft_printf("%p", &a);
-	printf("\nReal: ");
-	ret_real = printf("%p", &a);
-	printf("\nRetornos -> Mio: %d | Real: %d\n\n", ret_mio, ret_real);
-
-	printf("NULL Mio:  ");
-	ret_mio = ft_printf("%p", NULL);
-	printf("\nNULL Real: ");
-	ret_real = printf("%p", NULL);
-	printf("\nRetornos -> Mio: %d | Real: %d\n", ret_mio, ret_real);
-
-	return (0);
-}
-*/
-/*
-int	main(void)
-{
+	int 	a = 42;
+	int 	ret_mio;
+	int		ret_real;
 	void	*ptr1 = (void *)0x7ffeefbff618;
 	void	*ptr2 = NULL;
-	int		a = 42;
 	void	*ptr3 = &a;
 	int		res_ft;
 	int		res_std;
 
-	
+	printf("--- TEST P (Punteros) ---\n");
+
+	ret_mio = ft_printf("Mio : %p\n", &a);
+	ret_real = printf("Real: %p\n", &a);
+	printf("\nRetornos -> Mio: %d | Real: %d\n\n", ret_mio, ret_real);
+
+
+	ret_mio = ft_printf("NULL Mio : %p\n", NULL);
+	ret_real = printf("NULL Real: %p\n", NULL);
+	printf("\nRetornos -> Mio: %d | Real: %d\n\n\n", ret_mio, ret_real);
+
+
+
 	printf("--- TEST 1: Puntero normal ---\n");
 	res_ft = ft_printf("FT : %p\n", ptr1);
 	res_std = printf("STD: %p\n", ptr1);
@@ -133,14 +180,49 @@ int	main(void)
 /*
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int main(void)
 {
-	printf("--- TEST x y X ---\n");
-	ft_printf("Minus: %x (debe ser ff)\n", 255);
-	ft_printf("Mayus: %X (debe ser FF)\n", 255);
-	ft_printf("Cero:  %x\n", 0);
-	ft_printf("Grande: %x (debe ser 7fffffff)\n", 2147483647);
+	int res_ft;
+	int res_std;
+	unsigned int n1 = 255;
+	unsigned int n2 = 0;
+	unsigned int n3 = 4294967295U; // UINT_MAX
+	unsigned int n4 = 0xabcdef;
+
+	printf("--- TEST HEXADECIMAL (%%x y %%X) ---\n\n");
+
+	printf("--- TEST 1: Valor 255 en minúsculas (%%x) ---\n");
+	res_ft = ft_printf("FT : %x\n", n1);
+	res_std = printf("STD: %x\n", n1);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 2: Valor 255 en mayúsculas (%%X) ---\n");
+	res_ft = ft_printf("FT : %X\n", n1);
+	res_std = printf("STD: %X\n", n1);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 3: El número Cero (%%x) ---\n");
+	res_ft = ft_printf("FT : %x\n", n2);
+	res_std = printf("STD: %x\n", n2);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 4: Valor máximo unsigned (%%x) ---\n");
+	res_ft = ft_printf("FT : %x\n", n3);
+	res_std = printf("STD: %x\n", n3);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 5: Mezcla de min/may y texto ---\n");
+	res_ft = ft_printf("FT : %x y %X\n", n4, n4);
+	res_std = printf("STD: %x y %X\n", n4, n4);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 6: Varios seguidos ---\n");
+	res_ft = ft_printf("FT : %x %x %x\n", 10, 11, 12);
+	res_std = printf("STD: %x %x %x\n", 10, 11, 12);
+	printf("Retorno -> FT: %d | STD: %d\n", res_ft, res_std);
+
 	return (0);
 }
 */
@@ -152,39 +234,46 @@ int main(void)
 /*
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int main(void)
 {
-	printf("--- TEST U (Unsigned) ---\n");
-	ft_printf("Mio (Max Unsigned): %u\n", 4294967295U);
-	printf("Real (Max Unsigned): %u\n", 4294967295U);
-	
-	// Prueba pasarle un negativo a ver si lo convierte a positivo grande
-	ft_printf("Mio (Pasando -1): %u\n", -1);
-	printf("Real (Pasando -1): %u\n", -1);
+	int res_ft;
+	int res_std;
+	unsigned int n1 = 0;
+	unsigned int n2 = 123456789;
+	unsigned int n3 = UINT_MAX; // 4294967295
+
+	printf("--- TEST DECIMAL SIN SIGNO (%%u) ---\n\n");
+
+	printf("--- TEST 1: El número Cero ---\n");
+	res_ft = ft_printf("FT : %u\n", n1);
+	res_std = printf("STD: %u\n", n1);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 2: Un número positivo estándar ---\n");
+	res_ft = ft_printf("FT : %u\n", n2);
+	res_std = printf("STD: %u\n", n2);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 3: Valor máximo (UINT_MAX) ---\n");
+	res_ft = ft_printf("FT : %u\n", n3);
+	res_std = printf("STD: %u\n", n3);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 4: Pasando -1 (Debe salir 4294967295) ---\n");
+	res_ft = ft_printf("FT : %u\n", -1);
+	res_std = printf("STD: %u\n", -1);
+	printf("Retorno -> FT: %d | STD: %d\n\n", res_ft, res_std);
+
+	printf("--- TEST 5: Varios unsigned seguidos ---\n");
+	res_ft = ft_printf("FT : %u %u %u\n", 1, 10, 100);
+	res_std = printf("STD: %u %u %u\n", 1, 10, 100);
+	printf("Retorno -> FT: %d | STD: %d\n", res_ft, res_std);
+
 	return (0);
 }
 */
-
 //cc -Wall -Wextra -Werror main.c ft_printf.c printf_c_s.c printf_d_i.c printf_p.c printf_u.c printf_x_x.c -o test_printf && ./test_printf
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-#include <stdio.h>
-
-
-// cc main.c ft_printf.c printf_c_s.c printf_d_i.c printf_u.c printf_p.c printf_x_x.c -o  prueba && ./prueba
-
-*/

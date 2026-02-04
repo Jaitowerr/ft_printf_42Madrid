@@ -6,14 +6,19 @@
 #    By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/30 17:32:47 by aitorres          #+#    #+#              #
-#    Updated: 2026/01/30 19:16:55 by aitorres         ###   ########.fr        #
+#    Updated: 2026/02/04 01:30:56 by aitorres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libftprintf.a
 
 SRC		=	ft_printf.c\
-			ft_putendl_fd.c
+			ft_printf_c_s.c\
+			ft_printf_d_i.c\
+			ft_printf_p.c\
+			ft_printf_u.c\
+			ft_printf_x_x.c
+
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -21,7 +26,7 @@ AR		=	ar rcs
 CC		=	cc
 FLAGS	=	-Wall -Werror -Wextra
 
-all:		$(NAME)	#crea la librería con todos los objetos (incluyendo listas)
+all:		$(NAME)	#crea la librería con todos los objetos
 
 $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
@@ -40,7 +45,6 @@ fclean:		clean
 
 re:			fclean	all	#recompila desde cero
 
-# bonus: $(NAME)
 
 # make        # Compila todo
 # make clean  # Borra objetos
