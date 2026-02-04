@@ -6,9 +6,13 @@
 #    By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/30 17:32:47 by aitorres          #+#    #+#              #
-#    Updated: 2026/02/04 01:47:33 by aitorres         ###   ########.fr        #
+#    Updated: 2026/02/04 13:49:35 by aitorres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+GREEN := \033[0;32m
+
+RED := \033[31m
 
 NAME	=	libftprintf.a
 
@@ -30,22 +34,24 @@ all:		$(NAME)	#crea la librería con todos los objetos
 
 $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
-			@echo "$(NAME) creado."
+			@echo "${GREEN} $(NAME) creado."
 
 %.o:		%.c	#para compilar cualquier .c a .o
 			@$(CC) $(FLAGS) -c $< -o $@
 
 clean:		
 			@rm -f $(OBJ)
-			@echo "Objetos eliminados."
+			@echo "${RED} Objetos eliminados."
 			
 fclean:		clean
 			@rm -f $(NAME)
-			@echo "Librería eliminada."
+			@echo "${RED} Librería eliminada."
 
 re:			fclean	all	#recompila desde cero
 
 .PHONY: all clean fclean re
+
+TOTAL = 10
 
 # make        # Compila todo
 # make clean  # Borra objetos

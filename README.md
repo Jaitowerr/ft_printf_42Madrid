@@ -3,6 +3,8 @@
 # 📝 Descripción
 El proyecto **ft_printf** consiste en la recreación de la función `printf` de la biblioteca estándar de C (`stdio.h`). El objetivo principal es profundizar en el conocimiento de las **funciones variádicas** en C, el manejo de argumentos variables mediante macros y la conversión eficiente de diversos tipos de datos a formato de texto.
 
+Así mismo, mejorar en el control de errores para el trabajo futuro y saber porque falla el código, porque se satura la ram, etc...
+
 La función desarrollada es capaz de procesar una cadena de formato y un número indeterminado de argumentos, devolviendo el número total de caracteres impresos, tal como lo hace la función original.
 <br><br><br>
 
@@ -21,15 +23,16 @@ La función desarrollada es capaz de procesar una cadena de formato y un número
  
 <br><br><br>
 # 🛠️ Instrucciones
-<br>
-### Compilación
+
+
+### <ins>Compilación<ins>
 Para compilar la librería, navega a la raíz del proyecto y ejecuta el comando `make`.
 
 El **Makefile** ha sido configurado para compilar los archivos fuente y generar la librería estática requerida:
 
 Esto generará el archivo `libftprintf.a`. Puedes limpiar los archivos objetos con `make clean` o realizar una limpieza total (objetos y librería.a) con `make fclean`.
 
-### Instalación y Ejecución
+### <ins>Instalación y Ejecución<ins>
 Para integrar ft_printf en tus propios programas:
 
 Incluye el encabezado en tu código: #include "ft_printf.h".

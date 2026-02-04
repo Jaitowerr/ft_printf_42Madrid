@@ -6,7 +6,7 @@
 /*   By: aitorres <aitorres@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:18:11 by aitorres          #+#    #+#             */
-/*   Updated: 2026/02/04 01:54:39 by aitorres         ###   ########.fr       */
+/*   Updated: 2026/02/04 13:41:50 by aitorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	classification(char s, va_list arguments)
 	else if (s == 'x' || s == 'X')
 		return (ft_hexadecimal(arguments, s));
 	else if (s == '%')
-		return (write(1, "%", 1));
+		return (ft_putchar_fd('%', 1));
 	return (-1);
 }
 
