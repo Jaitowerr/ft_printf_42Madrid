@@ -36,15 +36,15 @@ Incluye el encabezado en tu código: #include "ft_printf.h".
 
 Compila tu archivo fuente vinculando la librería estática generada:
 
+<br>
+
     cc main.c libftprintf.a -o mi_programa &&./mi_programa
-<br><br>
+<br>
 
 
 ## 🧠 Algoritmo y Estructura de Datos
 
-<br>
-
-### Elección de la Estructura
+### <ins>Elección de la Estructura</ins>
 
 Para este proyecto se ha optado por una estructura modular funcional.
 
@@ -54,7 +54,7 @@ En su lugar, se utiliza la pila (stack) de memoria mediante la librería <stdarg
 
 <br>
 
-### Justificación del Algoritmo
+### <ins>Justificación del Algoritmo</ins>
 
 El algoritmo implementado sigue una lógica de iteración simple con despacho de funciones:
 
@@ -68,7 +68,7 @@ El algoritmo implementado sigue una lógica de iteración simple con despacho de
 
 <br><br><br>
 # 📚 Recursos
-Referencias Clásicas
+Referencias:
 * Man printf(3): Manual oficial de Linux para entender el comportamiento y los valores de retorno.
 * ISO/IEC 9899: Estándar del lenguaje C para la definición de tipos y conversiones.
 * Kernighan & Ritchie: "The C Programming Language" para la base teórica de las funciones con elipsis.
